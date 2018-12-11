@@ -32,7 +32,7 @@
 /* CLI parser, prompt */
 #define CFG_HUSH_PARSER		1
 #define CFG_LONGHELP		1
-#define CFG_PROMPT		"u-boot> "
+#define CFG_PROMPT		"xag-boot> "
 #define CFG_PROMPT_HUSH_PS2	"> "
 
 #define CFG_CBSIZE		1024
@@ -73,8 +73,8 @@
 #define CFG_MONITOR_LEN		(192 << 10)
 
 /* Default device and server IPs, net console */
-#define CONFIG_IPADDR		192.168.1.1
-#define CONFIG_SERVERIP		192.168.1.2
+#define CONFIG_IPADDR		192.168.1.2
+#define CONFIG_SERVERIP		192.168.1.10
 #define CONFIG_NETCONSOLE	1
 #define CONFIG_NETCONSOLE_PORT	6666
 

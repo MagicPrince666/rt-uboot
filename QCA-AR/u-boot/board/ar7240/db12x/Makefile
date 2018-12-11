@@ -12,6 +12,10 @@ ifeq ($(ETH_CONFIG), _s27)
 OBJS	+= ../common/athrs27_phy.o
 endif
 
+ifeq ($(ETH_CONFIG), _ar803x)
+OBJS	+= ../common/ar803x_phy.o
+endif
+
 $(LIB):	.depend $(OBJS) $(SOBJS)
 	$(AR) crv $@ $(OBJS) $(SOBJS)
 

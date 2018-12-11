@@ -72,6 +72,12 @@
 
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO11 | GPIO12 | GPIO13
 
+#elif defined(CONFIG_FOR_XAG_XLINKHS)||\
+      defined(CONFIG_FOR_XAG_XLINKHS_8M)||\
+      defined(CONFIG_FOR_XLINKHS)
+
+	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO11 | GPIO12 | GPIO14
+
 #elif defined(CONFIG_FOR_TPLINK_WR841N_V8)
 
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO12 | GPIO13 | GPIO14 |\
@@ -125,6 +131,24 @@
 				"mtdparts=ath-nor0:64k(u-boot),64k(u-boot-env),6528k(rootfs),1408K(uImage)"\
 				",7936k@0x20000(firmware),64k(NVRAM),64k(ART),8128k@0x00000(firmware2)"
 
+#elif defined(CONFIG_FOR_XLINKHS)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
+				"rootfstype=jffs2 init=/sbin/init "\
+				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),14528k(rootfs),1472k(uImage),64k(mib0),64k(ART)"
+//console=ttyS0,115200 mtdparts=ath-nor0:256k(boot)ro,64k(boot_env),1280k(kernel),6400k(rootfs),64k(nvram),64k(board_data),64k(rf_data) mem=64M
+#elif defined(CONFIG_FOR_XAG_XLINKHS)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
+				"rootfstype=jffs2 init=/sbin/init "\
+				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),14528k(rootfs),1472k(uImage),64k(mib0),64k(ART)"
+				
+#elif defined(CONFIG_FOR_XAG_XLINKHS_8M)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
+				"rootfstype=jffs2 init=/sbin/init "\
+				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),6464k(rootfs),1472k(uImage),64k(mib0),64k(ART)"//8M flash
+
 #else
 
 	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
@@ -141,6 +165,12 @@
 #if defined(CONFIG_FOR_ALFA_NETWORK_N5Q)
 
 	#define CFG_LOAD_ADDR		0x9F080000
+
+#elif defined(CONFIG_FOR_XAG_XLINKHS) ||\
+	  defined(CONFIG_FOR_XAG_XLINKHS_8M)||\
+	  defined(CONFIG_FOR_XLINKHS)
+
+	#define CFG_LOAD_ADDR		0x9F030000
 
 #elif defined(CONFIG_FOR_ENGENIUS_ENS202EXT)
 
@@ -222,6 +252,19 @@
       defined(CONFIG_FOR_YUNCORE_CPE870)
 
 	#define OFFSET_MAC_DATA_BLOCK		0xFF0000
+	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
+	#define OFFSET_MAC_ADDRESS		0x000000
+
+#elif defined(CONFIG_FOR_XAG_XLINKHS)||\
+      defined(CONFIG_FOR_XLINKHS)
+
+	#define OFFSET_MAC_DATA_BLOCK		0xFF0000
+	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
+	#define OFFSET_MAC_ADDRESS		0x000000
+
+#elif defined(CONFIG_FOR_XAG_XLINKHS_8M)
+
+	#define OFFSET_MAC_DATA_BLOCK		0x7F0000
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
 	#define OFFSET_MAC_ADDRESS		0x000000
 
@@ -325,6 +368,9 @@
       defined(CONFIG_FOR_TPLINK_WDR3600_V1) ||\
       defined(CONFIG_FOR_TPLINK_WDR43X0_V1) ||\
       defined(CONFIG_FOR_TPLINK_WR1041N_V2) ||\
+      defined(CONFIG_FOR_XLINKHS) 			||\
+	  defined(CONFIG_FOR_XAG_XLINKHS) 		||\
+	  defined(CONFIG_FOR_XAG_XLINKHS_8M) 	||\
       defined(CONFIG_FOR_TPLINK_WR841N_V8)  ||\
       defined(CONFIG_FOR_YUNCORE_CPE870)
 

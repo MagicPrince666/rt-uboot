@@ -42,6 +42,10 @@ extern void athrs27_reg_init(void);
 extern void athrs27_reg_init_lan(void);
 #endif
 
+#ifdef CONFIG_ATHRS_AR803X_PHY
+extern void ar803x_reg_init(void);
+#endif
+
 #if defined(CONFIG_F1E_PHY) || defined(CONFIG_F2E_PHY)
 extern void athr_reg_init(void);
 #endif
@@ -165,6 +169,21 @@ void ag7240_mii_setup(ag7240_mac_t *mac)
 		ag7240_reg_wr(ag7240_macs[1], AG7240_MAC_MII_MGMT_CFG, mgmt_cfg_val);
 		return;
 	}
+#endif
+
+#ifdef CONFIG_ATHRS_AR803X_PHY
+    if (is_wasp()) {
+        printf("WASP  ----> ar803x PHY *\n");
+        mgmt_cfg_val = 4;
+        ar7240_reg_wr(AG7240_ETH_CFG, AG7240_ETH_CFG_RGMII_GE0);
+
+        udelay(1000);
+
+        ag7240_reg_wr(mac, AG7240_MAC_MII_MGMT_CFG, mgmt_cfg_val | (1 << 31));
+        ag7240_reg_wr(mac, AG7240_MAC_MII_MGMT_CFG, mgmt_cfg_val);
+
+        return;
+    }
 #endif
 
 #ifdef CONFIG_F2E_PHY
@@ -354,6 +373,12 @@ static int ag7240_check_link(ag7240_mac_t *mac)
 		if(is_wasp() && (mac->mac_unit == 0)){
 			ar7240_reg_wr(AR7242_ETH_XMII_CONFIG, 0x82000000);
 			ar7240_reg_wr(AG7240_ETH_CFG, 0x000c0001);
+		}
+#elif CONFIG_ATHRS_AR803X_PHY
+		if (is_wasp() && (mac->mac_unit == 0) && !is_f2e()){
+			ar7240_reg_rmw_set(AG7240_ETH_CFG, AG7240_ETH_CFG_RXD_DELAY);
+			ar7240_reg_rmw_set(AG7240_ETH_CFG, AG7240_ETH_CFG_RDV_DELAY);
+			ar7240_reg_wr(AR7242_ETH_XMII_CONFIG, 0x03000000);
 		}
 #else
 		if (is_wasp() && (mac->mac_unit == 0) && !is_f2e()){
@@ -643,6 +668,11 @@ int ag7240_enet_initialize(bd_t * bis)
 #ifdef CONFIG_F2E_PHY
 			//printf("F2Phy reg init \n");
 			athr_reg_init();
+#endif
+
+#ifdef CONFIG_ATHRS_AR803X_PHY
+            //printf("Ar803x Phy reg init \n");
+            ar803x_reg_init();
 #endif
 
 			}

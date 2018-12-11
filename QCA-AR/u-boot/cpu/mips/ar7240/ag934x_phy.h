@@ -29,6 +29,13 @@ extern int athrs27_phy_setup(int unit);
 extern int athrs27_phy_is_fdx(int unit);
 #endif
 
+#ifdef CONFIG_ATHRS_AR803X_PHY
+extern int ar803x_phy_setup(int unit);
+extern int ar803x_phy_is_up(int unit);
+extern int ar803x_phy_is_fdx(int unit);
+extern int ar803x_phy_speed(int unit);
+#endif
+
 static inline void ag7240_phy_setup(int unit){
 #ifdef CONFIG_AR7242_S16_PHY
 	if ((is_ar7242() || is_wasp()) && (unit==0)) {

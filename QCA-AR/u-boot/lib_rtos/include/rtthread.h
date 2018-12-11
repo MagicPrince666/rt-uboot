@@ -37,6 +37,7 @@
 #include <rtdef.h>
 #include <rtservice.h>
 #include <rtm.h>
+//#include <common.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -477,7 +478,7 @@ void rt_components_board_init(void);
  * general kernel service
  */
 #ifndef RT_USING_CONSOLE
-extern int	printf(const char *fmt, ...);
+//extern int	printf(const char *fmt, ...);
 extern void	puts(const char *s);
 #define rt_kprintf(fmt, args...)	printf(fmt, ##args)
 #define rt_kputs(str)	puts(str)

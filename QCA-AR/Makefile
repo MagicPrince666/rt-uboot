@@ -52,11 +52,15 @@ export SUB_MAKE_CMD = $(MAKE) --silent --no-print-directory \
 # Define _absolute_ path to your toolchain directory, for example:
 # export TOOLCHAIN_DIR:=/home/user/toolchain-mips_24kc_gcc-5.4.0_musl-1.1.15
 # export PATH:=$(TOOLCHAIN_DIR)/bin:$(PATH)
-
+# export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 ifndef CROSS_COMPILE
-  CROSS_COMPILE = mips-openwrt-linux-musl-
+  CROSS_COMPILE = /Volumes/WPJ342/xlinkhs/staging_dir/toolchain-mips_24kc_gcc-7.3.0_musl/bin/mips-openwrt-linux-musl-
 endif
 export CROSS_COMPILE
+
+#BOARD=db12x
+#ETH_CONFIG=_ar803x
+#make BOARD=db12x ETH_CONFIG=_ar803x BUILD_CONFIG=_mi124
 
 # By default, optimization for size (-Os) is enabled, set below option
 # to n or remove it if you want only basic optimization (-O/-O1)
@@ -225,7 +229,7 @@ COMMON_AR933X_TARGETS = \
 
 $(COMMON_AR933X_TARGETS):
 	@$(call build,123,1)
-
+  
 COMMON_ETHS27_TARGETS = \
 	gainstrong_oolite_v5.2 \
 	gainstrong_oolite_v5.2_dev \
@@ -250,6 +254,16 @@ COMMON_ETHS27_TARGETS = \
 
 $(COMMON_ETHS27_TARGETS):
 	@$(call build,123,1,ETH_CONFIG=_s27)
+
+COMMON_XAG_AR9342_TARGETS = \
+  xlinkhs \
+  xag-xlinkhs \
+  xag-xlinkhs-8m 
+
+#$(COMMON_XAG_AR9342_TARGETS):
+#  @$(call build,192,1,ETH_CONFIG=_ar803x)
+$(COMMON_XAG_AR9342_TARGETS):
+	@$(call build,192,1,ETH_CONFIG=_ar803x)
 
 8devices_carambola2 \
 alfa-network_hornet-ub \

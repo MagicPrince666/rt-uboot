@@ -383,6 +383,11 @@ ar933x_common: unconfig config_common
 	@$(call define_add,CFG_ATHRS26_PHY,1)
 	@$(call define_add,CONFIG_MACH_HORNET,1)
 
+xag_common: unconfig config_common
+	@$(call define_add,CONFIG_WASP,1)
+	@$(call define_add,CONFIG_WASP_SUPPORT,1)
+	@$(call define_add,CONFIG_ATHRS_AR803X_PHY,1)
+
 ar934x_common: unconfig config_common
 	@$(call define_add,CONFIG_WASP,1)
 	@$(call define_add,CONFIG_WASP_SUPPORT,1)
@@ -682,6 +687,36 @@ tp-link_tl-wr1041n_v2: ar934x_common lsdk_kernel
 	@$(call config_init,TP-Link TL-WR1041N v2,tl-wr1041n-v2,4,14,1,QCA_AR9342_SOC)
 	@$(call define_add,CONFIG_FOR_TPLINK_WR1041N_V2,1)
 	@$(call define_add,CFG_ATHRS17_PHY,1)
+	@$(call define_add,CFG_AG7240_NMACS,1)
+	@$(call define_add,CFG_DUAL_PHY_SUPPORT,1)
+	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
+
+#for xlink 16M flash
+xlinkhs: xag_common lsdk_kernel
+	@$(call config_init,XLINKHS,xlinkhs,16,16,1,QCA_AR9342_SOC)
+	@$(call define_add,CONFIG_FOR_XLINKHS,1)
+	@$(call define_add,CONFIG_ATHRS_AR803X_PHY,1)
+	@$(call define_add,CONFIG_USB,1)
+	@$(call define_add,CFG_AG7240_NMACS,1)
+	@$(call define_add,CFG_DUAL_PHY_SUPPORT,1)
+	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
+
+#for 16M flash
+xag-xlinkhs: xag_common lsdk_kernel
+	@$(call config_init,XAG XLINKHS,xag-xlinkhs,16,16,1,QCA_AR9342_SOC)
+	@$(call define_add,CONFIG_FOR_XAG_XLINKHS,1)
+	@$(call define_add,CONFIG_ATHRS_AR803X_PHY,1)
+	@$(call define_add,CONFIG_USB,1)
+	@$(call define_add,CFG_AG7240_NMACS,1)
+	@$(call define_add,CFG_DUAL_PHY_SUPPORT,1)
+	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
+
+#for 8M flash
+xag-xlinkhs-8m: xag_common lsdk_kernel
+	@$(call config_init,XAG XLINKHS,xag-xlinkhs,8,16,1,QCA_AR9342_SOC)
+	@$(call define_add,CONFIG_FOR_XAG_XLINKHS_8M,1)
+	@$(call define_add,CONFIG_ATHRS_AR803X_PHY,1)
+	@$(call define_add,CONFIG_USB,1)
 	@$(call define_add,CFG_AG7240_NMACS,1)
 	@$(call define_add,CFG_DUAL_PHY_SUPPORT,1)
 	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
