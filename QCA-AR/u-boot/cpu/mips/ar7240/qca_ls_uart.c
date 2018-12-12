@@ -14,6 +14,17 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
+#define QCA_GPIO_OUT_FUNCTION3_ENABLE_GPIO_13(x)	((0xff&x)<< 8)
+
+#define AR934X_LS_UART0_TX				13
+#define AR934X_LS_UART0_RX				15
+
+#define DEFAULT_LS_UART0_TX				10
+#define DEFAULT_LS_UART0_RX				9
+
+#define ATH_GPIO_OUT_FUNCTION2_ENABLE_GPIO_10(x)	((0xff&x)<<16)
+#define ATH_GPIO_OUT_FUNCTION2_ENABLE_GPIO_9(x)		((0xff&x)<< 8)
+
 void serial_setbrg(void)
 {
 	u32 div;
@@ -29,6 +40,48 @@ void serial_setbrg(void)
 	} else {
 		div = (VAL_25MHz + (8 * gd->baudrate)) / (16 * gd->baudrate);
 	}
+
+#if 0
+	u32 data;
+
+	//set AR934X_LS_UART0_TX as output
+	//set AR934X_LS_UART0_RX as input
+	data = qca_soc_reg_read(QCA_GPIO_OE_REG);
+	data = (data & (~BIT(AR934X_LS_UART0_TX))) | BIT(AR934X_LS_UART0_RX);
+	qca_soc_reg_write(QCA_GPIO_OE_REG,data);
+
+	//set AR934X_LS_UART0_TX to TX
+	data = qca_soc_reg_read(QCA_GPIO_OUT_FUNC3_REG);
+	data = (data & ~QCA_GPIO_OUT_FUNCX_GPIO13_EN_MASK) |
+		QCA_GPIO_OUT_FUNCTION3_ENABLE_GPIO_13(QCA_GPIO_OUT_MUX_LSUART_TXD_VAL);
+	qca_soc_reg_write(QCA_GPIO_OUT_FUNC3_REG, data);
+
+	data = qca_soc_reg_read(QCA_GPIO_IN_EN0_REG);
+	data = (data&0x00FF) | (AR934X_LS_UART0_RX<<8);
+	qca_soc_reg_write(QCA_GPIO_IN_EN0_REG, data);
+
+#else
+
+	u32 data;
+
+	//set DEFAULT_LS_UART0_TX as output
+	//set DEFAULT_LS_UART0_RX as input
+	data = qca_soc_reg_read(QCA_GPIO_OE_REG);
+	data = (data & (~BIT(DEFAULT_LS_UART0_TX))) | BIT(DEFAULT_LS_UART0_RX);
+	qca_soc_reg_write(QCA_GPIO_OE_REG,data);
+
+	//set AR934X_LS_UART0_TX to TX
+	data = qca_soc_reg_read(QCA_GPIO_OUT_FUNC2_REG);
+	data = (data & ~QCA_GPIO_OUT_FUNCX_GPIO10_EN_MASK) |
+		ATH_GPIO_OUT_FUNCTION2_ENABLE_GPIO_10(QCA_GPIO_OUT_MUX_LSUART_TXD_VAL);
+	qca_soc_reg_write(QCA_GPIO_OUT_FUNC2_REG, data);
+
+
+	data = qca_soc_reg_read(QCA_GPIO_IN_EN0_REG);
+	data = (data&0x00FF) | DEFAULT_LS_UART0_RX << 8;
+	qca_soc_reg_write(QCA_GPIO_IN_EN0_REG, data);
+
+#endif
 
 	/* Set DLAB bit in LCR register unlocks DLL/DLH registers */
 	qca_soc_reg_read_set(QCA_LSUART_LCR_REG, QCA_LSUART_LCR_DLAB_MASK);

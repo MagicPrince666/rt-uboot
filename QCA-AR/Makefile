@@ -250,6 +250,8 @@ COMMON_ETHS27_TARGETS = \
 	tp-link_tl-wr841n_v8 \
 	tp-link_tl-wr841n_v9 \
 	tp-link_tl-wr842n_v3 \
+  ligowave \
+  ligowave-8M \
 	tp-link_tl-wr902ac_v1
 
 $(COMMON_ETHS27_TARGETS):
@@ -260,8 +262,6 @@ COMMON_XAG_AR9342_TARGETS = \
   xag-xlinkhs \
   xag-xlinkhs-8m 
 
-#$(COMMON_XAG_AR9342_TARGETS):
-#  @$(call build,192,1,ETH_CONFIG=_ar803x)
 $(COMMON_XAG_AR9342_TARGETS):
 	@$(call build,192,1,ETH_CONFIG=_ar803x)
 

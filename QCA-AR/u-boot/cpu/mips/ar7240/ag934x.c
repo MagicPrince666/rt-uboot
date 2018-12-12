@@ -671,7 +671,7 @@ int ag7240_enet_initialize(bd_t * bis)
 #endif
 
 #ifdef CONFIG_ATHRS_AR803X_PHY
-            //printf("Ar803x Phy reg init \n");
+            printf("Ar803x Phy reg init \n");
             ar803x_reg_init();
 #endif
 

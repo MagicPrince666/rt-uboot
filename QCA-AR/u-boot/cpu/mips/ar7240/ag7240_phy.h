@@ -22,10 +22,6 @@ static inline void ag7240_phy_setup(int unit) {
 #ifdef CONFIG_F1E_PHY
 		athr_phy_setup(unit);
 #endif
-#ifdef CONFIG_ATHRS_AR803X_PHY
-	ar803x_phy_setup(unit);
-    //printf("ar803x_phy_setup(unit);\n");
-#endif
 	}
 }
 
@@ -39,9 +35,6 @@ static inline void ag7240_phy_link(int unit, int *link) {
 		*link = athrs26_phy_is_up(unit);
 #ifdef CONFIG_F1E_PHY
 		*link = athr_phy_is_up(unit);
-#endif
-#ifdef CONFIG_ATHRS_AR803X_PHY
-         *link = ar803x_phy_is_up(unit);
 #endif
 	}
 }
@@ -57,9 +50,6 @@ static inline void ag7240_phy_duplex(int unit, int *duplex) {
 #ifdef CONFIG_F1E_PHY
 		*duplex = athr_phy_is_fdx(unit);
 #endif
-#ifdef CONFIG_ATHRS_AR803X_PHY
-        *duplex = ar803x_phy_is_fdx(unit);
-#endif
 	}
 }
 
@@ -73,9 +63,6 @@ static inline void ag7240_phy_speed(int unit, int *speed) {
 		*speed = athrs26_phy_speed(unit);
 #ifdef CONFIG_F1E_PHY
 		*speed = athr_phy_speed(unit);
-#endif
-#ifdef CONFIG_ATHRS_AR803X_PHY
-        *speed = ar803x_phy_speed(unit);
 #endif
 	}
 }

@@ -721,6 +721,20 @@ xag-xlinkhs-8m: xag_common lsdk_kernel
 	@$(call define_add,CFG_DUAL_PHY_SUPPORT,1)
 	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
 
+ligowave: ar934x_common
+	@$(call config_init,MAGIC PRINCE,ligowve,16,1,1,QCA_AR9341_SOC)
+	@$(call define_add,CONFIG_FOR_LIGOWAVE_16M,1)
+	@$(call define_add,CFG_ATHRS27_PHY,1)
+	@$(call define_add,CFG_AG7240_NMACS,2)
+	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
+
+ligowave-8M: ar934x_common
+	@$(call config_init,MAGIC PRINCE,ligowve,8,19,1,QCA_AR9341_SOC)
+	@$(call define_add,CONFIG_FOR_LIGOWAVE_8M,1)
+	@$(call define_add,CFG_ATHRS27_PHY,1)
+	@$(call define_add,CFG_AG7240_NMACS,2)
+	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
+
 tp-link_tl-wr703n_v1: ar933x_common lsdk_kernel
 	@$(call config_init,TP-Link TL-WR703N v1,tl-wr703n-v1,4,11,,QCA_AR9331_SOC)
 	@$(call define_add,CONFIG_FOR_TPLINK_WR703N_V1,1)

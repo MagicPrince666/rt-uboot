@@ -85,6 +85,12 @@
 						GPIO20 | GPIO21
 	#define CONFIG_QCA_GPIO_MASK_IN		GPIO16
 
+#elif defined(CONFIG_FOR_LIGOWAVE_8M)||\
+	  defined(CONFIG_FOR_LIGOWAVE_16M)
+
+	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L GPIO21
+	#define CONFIG_QCA_GPIO_MASK_IN		GPIO19
+
 #elif defined(CONFIG_FOR_YUNCORE_CPE870)
 
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO0 | GPIO1  | GPIO2  |\
@@ -149,6 +155,19 @@
 				"rootfstype=jffs2 init=/sbin/init "\
 				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),6464k(rootfs),1472k(uImage),64k(mib0),64k(ART)"//8M flash
 
+#elif defined(CONFIG_FOR_LIGOWAVE_8M)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:04 "\
+				"rootfstype=squashfs init=/etc/preinit "\
+				"mtdparts=spi0.0:256k(u-boot)ro,64k(u-boot-env),6464k(rootfs),1472k(uImage),64k(mib0),64k(ART)"
+
+#elif defined(CONFIG_FOR_LIGOWAVE_16M)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:04 "\
+				"rootfstype=squashfs init=/etc/preinit "\
+				"mtdparts=spi0.0:256k(u-boot)ro,64k(u-boot-env),320k(custom),1536k(kernel),12096k(rootfs),2048k(failsafe),64k(art)ro"
+
+
 #else
 
 	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
@@ -168,7 +187,9 @@
 
 #elif defined(CONFIG_FOR_XAG_XLINKHS) ||\
 	  defined(CONFIG_FOR_XAG_XLINKHS_8M)||\
-	  defined(CONFIG_FOR_XLINKHS)
+	  defined(CONFIG_FOR_XLINKHS)||\
+	  defined(CONFIG_FOR_LIGOWAVE_8M)||\
+	  defined(CONFIG_FOR_LIGOWAVE_16M)
 
 	#define CFG_LOAD_ADDR		0x9F030000
 
@@ -256,13 +277,15 @@
 	#define OFFSET_MAC_ADDRESS		0x000000
 
 #elif defined(CONFIG_FOR_XAG_XLINKHS)||\
-      defined(CONFIG_FOR_XLINKHS)
+      defined(CONFIG_FOR_XLINKHS)||\
+      defined(CONFIG_FOR_LIGOWAVE_16M)
 
 	#define OFFSET_MAC_DATA_BLOCK		0xFF0000
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
 	#define OFFSET_MAC_ADDRESS		0x000000
 
-#elif defined(CONFIG_FOR_XAG_XLINKHS_8M)
+#elif defined(CONFIG_FOR_XAG_XLINKHS_8M)||\
+      defined(CONFIG_FOR_LIGOWAVE_8M)
 
 	#define OFFSET_MAC_DATA_BLOCK		0x7F0000
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
@@ -371,6 +394,8 @@
       defined(CONFIG_FOR_XLINKHS) 			||\
 	  defined(CONFIG_FOR_XAG_XLINKHS) 		||\
 	  defined(CONFIG_FOR_XAG_XLINKHS_8M) 	||\
+	  defined(CONFIG_FOR_LIGOWAVE_8M)  		||\
+	  defined(CONFIG_FOR_LIGOWAVE_16M)  	||\
       defined(CONFIG_FOR_TPLINK_WR841N_V8)  ||\
       defined(CONFIG_FOR_YUNCORE_CPE870)
 

@@ -104,6 +104,21 @@ int serial_init(void)
 
 	qca_soc_reg_read_set(QCA_GPIO_FUNC_1_REG,
 						 QCA_GPIO_FUNC_1_UART_EN_MASK | BIT(15));
+
+#elif (SOC_TYPE & QCA_AR934X_SOC)
+
+	u32 data;
+	data = qca_soc_reg_read(QCA_GPIO_OE_REG);//set gpio13 to TX
+	data = (data & (~BIT(AR934X_HS_UART1_TX))) | BIT(AR934X_HS_UART1_RX);
+	qca_soc_reg_write(QCA_GPIO_OE_REG,data);
+
+	data = qca_soc_reg_read(QCA_GPIO_OUT_FUNC3_REG);//set gpio13 to TX
+	data = (data & ~QCA_GPIO_OUT_FUNCX_GPIO13_EN_MASK) |
+		((0xff&QCA_GPIO_OUT_MUX_HSUART_TXD_VAL_VAL)<<24);
+	qca_soc_reg_write(QCA_GPIO_OUT_FUNC3_REG, data);
+
+	qca_soc_reg_write(QCA_GPIO_IN_EN9_REG, AR934X_HS_UART1_RX<<16);
+	
 #else
 	#error "Missing GPIO configuration for HS UART"
 #endif

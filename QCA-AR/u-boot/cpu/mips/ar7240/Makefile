@@ -24,6 +24,7 @@ endif
 
 ifeq ($(BOARD), db12x)
 	OBJS	+= ag934x.o
+#	OBJS	+= qca_hs_uart.o
 	SOBJS	+= qca95xx_pll_init.o
 endif
 
