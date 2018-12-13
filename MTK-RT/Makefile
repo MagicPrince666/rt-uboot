@@ -47,7 +47,7 @@ export	TOPDIR
 ifeq ($(MT7621_MP), y)
 CONFIG_CROSS_COMPILER_PATH ?= /opt/mips-2012.03/bin/
 else
-CONFIG_CROSS_COMPILER_PATH ?= /root/u-boot-mt7688/buildroot-gcc342/bin
+CONFIG_CROSS_COMPILER_PATH ?= /opt/buildroot-gcc342/bin
 endif
 
 ifeq (include/config.mk,$(wildcard include/config.mk))
@@ -76,6 +76,9 @@ endif
 endif
 ifeq ($(ARCH),mips)
 CROSS_COMPILE = $(CONFIG_CROSS_COMPILER_PATH)/mipsel-linux-
+# export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+#CROSS_COMPILE = /home/prince/share/lede/staging_dir/toolchain-mipsel_24kc_gcc-7.3.0_musl/bin/mipsel-openwrt-linux-musl-
+export STAGING_DIR = /home/prince/share/lede/staging_dir
 endif
 ifeq ($(ARCH),nios)
 CROSS_COMPILE = $(CONFIG_CROSS_COMPILER_PATH)/nios-elf-

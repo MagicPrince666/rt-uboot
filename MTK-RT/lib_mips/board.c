@@ -2012,6 +2012,7 @@ void board_main_loop(void)
 	char addr_str[11];
 	bd_t *bd;
 	int i;
+	//int e_end;
 	
 	bd = gd->bd;
 	/*config bootdelay via environment parameter: bootdelay */
