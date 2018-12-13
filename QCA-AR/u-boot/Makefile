@@ -735,6 +735,15 @@ ligowave-8M: ar934x_common
 	@$(call define_add,CFG_AG7240_NMACS,2)
 	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
 
+wpj531: qca953x_common
+	@$(call config_init,COMPEX WPJ531,wpj531,16,17,1,QCA_QCA9531_SOC)
+	@$(call define_add,CONFIG_FOR_COMPEX_WPJ531,1)
+	@$(call define_add,CONFIG_USB,1)
+	@$(call define_add,CFG_ATHRS27_PHY,1)
+	@$(call define_add,CFG_ATH_GMAC_NMACS,2)
+	@$(call define_add,CONFIG_PCI,1)
+	@$(MKCONFIG) -a ap143 mips mips ap143 ar7240 ar7240
+
 tp-link_tl-wr703n_v1: ar933x_common lsdk_kernel
 	@$(call config_init,TP-Link TL-WR703N v1,tl-wr703n-v1,4,11,,QCA_AR9331_SOC)
 	@$(call define_add,CONFIG_FOR_TPLINK_WR703N_V1,1)

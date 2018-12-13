@@ -151,6 +151,11 @@
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO11 | GPIO12 | GPIO13 |\
 						GPIO14 | GPIO15 | GPIO16
 
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO4 | GPIO13 |\
+						GPIO14 | GPIO15 | GPIO16
+
 #elif defined(CONFIG_FOR_WHQX_E600G_V2)
 
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO4 | GPIO13 | GPIO15 | GPIO16
@@ -279,6 +284,13 @@
 				"rootfstype=jffs2 init=/sbin/init "\
 				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),6336k(rootfs),1408k(uImage),64k(mib0),64k(ART)"
 
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
+				"rootfstype=jffs2 init=/sbin/init "\
+				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),6336k(rootfs),1408k(uImage),8256k(mib0),64k(ART)"
+				//"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),6336k(rootfs),1408k(uImage),64k(mib0),64k(ART)"
+
 #elif defined(CONFIG_FOR_WHQX_E600G_V2)   ||\
       defined(CONFIG_FOR_WHQX_E600GAC_V2) ||\
       defined(CONFIG_FOR_YUNCORE_T830)
@@ -330,6 +342,10 @@
       defined(CONFIG_FOR_ZBTLINK_ZBT_WE1526)
 
 	#define CFG_LOAD_ADDR	0x9F050000
+
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+    #define CFG_LOAD_ADDR	0x9F030000
 
 #elif defined(CONFIG_FOR_GLINET_GL_AR750) ||\
       defined(CONFIG_FOR_WHQX_E600G_V2)   ||\
@@ -419,6 +435,12 @@
 	#define CFG_ENV_SIZE		0xF800
 	#define CFG_ENV_SECT_SIZE	0x10000
 
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+	#define CFG_ENV_ADDR		0x9F01EC00
+	#define CFG_ENV_SIZE		0x1000
+	#define CFG_ENV_SECT_SIZE	0x10000
+
 #endif
 
 /*
@@ -505,6 +527,13 @@
 	#define OFFSET_MAC_DATA_BLOCK		0x030000
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
 	#define OFFSET_MAC_ADDRESS		0x00F810
+
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+	//#define OFFSET_MAC_DATA_BLOCK		0x030000
+    #define OFFSET_MAC_DATA_BLOCK		0x02e000
+	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
+	#define OFFSET_MAC_ADDRESS		0x000010
 
 #elif defined(CONFIG_FOR_WHQX_E600G_V2) ||\
       defined(CONFIG_FOR_WHQX_E600GAC_V2)
@@ -603,6 +632,10 @@
 
 	#define WEBFAILSAFE_UPLOAD_LIMITED_AREA_IN_BYTES	(384 * 1024)
 
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+    #define WEBFAILSAFE_UPLOAD_LIMITED_AREA_IN_BYTES	(192 * 1024)
+
 #elif defined(CONFIG_FOR_TPLINK_WA850RE_V2) ||\
       defined(CONFIG_FOR_WHQX_E600G_V2)     ||\
       defined(CONFIG_FOR_WHQX_E600GAC_V2)
@@ -690,6 +723,11 @@
 	#define CONFIG_QCA_PLL_IN_FLASH_BLOCK_OFFSET	0x30000
 	#define CONFIG_QCA_PLL_IN_FLASH_BLOCK_SIZE	0x10000
 
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+	#define CONFIG_QCA_PLL_IN_FLASH_BLOCK_OFFSET	0x30000
+	#define CONFIG_QCA_PLL_IN_FLASH_BLOCK_SIZE	0x10000
+
 #endif
 
 /*
@@ -707,6 +745,7 @@
     !defined(CONFIG_FOR_P2W_CPE505N)           &&\
     !defined(CONFIG_FOR_P2W_R602N)             &&\
     !defined(CONFIG_FOR_WALLYS_DR531)          &&\
+    !defined(CONFIG_FOR_COMPEX_WPJ531)         &&\
     !defined(CONFIG_FOR_WHQX_E600G_V2)         &&\
     !defined(CONFIG_FOR_WHQX_E600GAC_V2)       &&\
     !defined(CONFIG_FOR_YUNCORE_AP90Q)         &&\

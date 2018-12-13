@@ -54,7 +54,8 @@ export SUB_MAKE_CMD = $(MAKE) --silent --no-print-directory \
 # export PATH:=$(TOOLCHAIN_DIR)/bin:$(PATH)
 # export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 ifndef CROSS_COMPILE
-  CROSS_COMPILE = /home/prince/share/opxlinkhs/staging_dir/toolchain-mips_24kc_gcc-7.3.0_musl/bin/mips-openwrt-linux-musl-
+  #CROSS_COMPILE = /home/prince/share/opxlinkhs/staging_dir/toolchain-mips_24kc_gcc-7.3.0_musl/bin/mips-openwrt-linux-musl-
+  CROSS_COMPILE = /Volumes/WPJ342/xlinkhs/staging_dir/toolchain-mips_24kc_gcc-7.3.0_musl/bin/mips-openwrt-linux-musl-
 endif
 export CROSS_COMPILE
 
@@ -320,8 +321,12 @@ village-telco_mesh-potato_v2:
 wallys_dr531:
 	@$(call build,192,1,ETH_CONFIG=_s27)
 
+wpj531:
+	@$(call build,192,1,ETH_CONFIG=_s27)
+
 yuncore_cpe870:
 	@$(call build,64,1,ETH_CONFIG=_s27)
+
 
 # =============
 # CLEAN TARGETS

@@ -32,7 +32,7 @@
 /* CLI parser, prompt */
 #define CFG_HUSH_PARSER		1
 #define CFG_LONGHELP		1
-#define CFG_PROMPT		"xag-boot> "
+#define CFG_PROMPT		"xag> "
 #define CFG_PROMPT_HUSH_PS2	"> "
 
 #define CFG_CBSIZE		1024
