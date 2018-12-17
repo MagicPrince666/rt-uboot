@@ -98,6 +98,12 @@ int do_set_mac(cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]){
 	// store new MAC address in RAM
 	for(i = 0; i < 6; i++){
 		data_pointer[OFFSET_MAC_ADDRESS + i] = simple_strtoul((char *)(argv[1] + i*3), NULL, 16);
+#if defined(OFFSET_MAC_ADDRESS2)//MAC2地址为MAC最后一位加1
+		if(i < 5)
+			data_pointer[OFFSET_MAC_ADDRESS2 + i] = simple_strtoul((char *)(argv[1] + i*3), NULL, 16);
+		else
+			data_pointer[OFFSET_MAC_ADDRESS2 + i] = simple_strtoul((char *)(argv[1] + i*3), NULL, 16) + 1;
+#endif
 	}
 
 	// now we can erase flash and write data from RAM

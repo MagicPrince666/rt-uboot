@@ -69,28 +69,45 @@ void usb_init(void)
 			<< QCA_PLL_SWITCH_CLK_CTRL_USB_CLK_SEL_SHIFT);
 
 	qca_soc_reg_write(QCA_PLL_SWITCH_CLK_CTRL_REG, val);
-	//udelay(1000);
 
+#ifdef  USB_HOST
 	/* Take out USB PHY/HOST/PLL out of reset */
 	qca_soc_reg_read_set(QCA_RST_RESET_REG,
 			     QCA_RST_RESET_USB_PHY_SUSPEND_ORIDE_MASK);
-	//udelay(1000);
 
 	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
 			       QCA_RST_RESET_USB_PHY_ARST_MASK);
-	//udelay(1000);
 
 	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
 			       QCA_RST_RESET_USB_PHY_RST_MASK);
-	//udelay(1000);
 
 	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
 			       QCA_RST_RESET_USB_HOST_RST_MASK);
-	//udelay(1000);
 
 	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
 			       QCA_RST_RESET_USB_PHY_PLLPWD_EXT_MASK);
-	//udelay(10);
+
+#else
+
+	/* Take out USB PHY/PLL out of reset */
+	qca_soc_reg_read_set(QCA_RST_RESET_REG,
+			     QCA_RST_RESET_USB_PHY_SUSPEND_ORIDE_MASK);
+
+	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
+			       QCA_RST_RESET_USB_PHY_ARST_MASK);
+
+	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
+			       QCA_RST_RESET_USB_PHY_RST_MASK);
+
+	//reset usb host we use usb device
+	qca_soc_reg_read_set(QCA_RST_RESET_REG,
+			       QCA_RST_RESET_USB_HOST_RST_MASK);
+
+	qca_soc_reg_read_clear(QCA_RST_RESET_REG,
+			       QCA_RST_RESET_USB_PHY_PLLPWD_EXT_MASK);
+
+#endif
+
 #endif
 }
 

@@ -364,6 +364,10 @@
 
 	#define CONFIG_BOOTCOMMAND	"bootm 0x9F050000 || bootm 0x9FE80000"
 
+#elif defined(CONFIG_FOR_COMPEX_WPJ531)
+
+    #define CONFIG_BOOTCOMMAND	"bootm 0x9f680000 || bootm 0x9f030000"
+
 #else
 
 	#define CONFIG_BOOTCOMMAND	"bootm " MK_STR(CFG_LOAD_ADDR)
@@ -437,8 +441,8 @@
 
 #elif defined(CONFIG_FOR_COMPEX_WPJ531)
 
-	#define CFG_ENV_ADDR		0x9F01EC00
-	#define CFG_ENV_SIZE		0x1000
+	#define CFG_ENV_ADDR		0x9F040000 //u-boot 256k
+	#define CFG_ENV_SIZE		0xFC00     //64k
 	#define CFG_ENV_SECT_SIZE	0x10000
 
 #endif
@@ -534,6 +538,7 @@
     #define OFFSET_MAC_DATA_BLOCK		0x02e000
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
 	#define OFFSET_MAC_ADDRESS		0x000010
+    #define OFFSET_MAC_ADDRESS2		0x00018
 
 #elif defined(CONFIG_FOR_WHQX_E600G_V2) ||\
       defined(CONFIG_FOR_WHQX_E600GAC_V2)
