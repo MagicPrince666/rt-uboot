@@ -724,6 +724,7 @@ xag-xlinkhs-8m: xag_common lsdk_kernel
 ligowave: ar934x_common
 	@$(call config_init,MAGIC PRINCE,ligowve,16,1,1,QCA_AR9341_SOC)
 	@$(call define_add,CONFIG_FOR_LIGOWAVE_16M,1)
+	@$(call define_add,CONFIG_USB,1)
 	@$(call define_add,CFG_ATHRS27_PHY,1)
 	@$(call define_add,CFG_AG7240_NMACS,2)
 	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240

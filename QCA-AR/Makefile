@@ -251,8 +251,6 @@ COMMON_ETHS27_TARGETS = \
 	tp-link_tl-wr841n_v8 \
 	tp-link_tl-wr841n_v9 \
 	tp-link_tl-wr842n_v3 \
-  ligowave \
-  ligowave-8M \
 	tp-link_tl-wr902ac_v1
 
 $(COMMON_ETHS27_TARGETS):
@@ -265,6 +263,10 @@ COMMON_XAG_AR9342_TARGETS = \
 
 $(COMMON_XAG_AR9342_TARGETS):
 	@$(call build,192,1,ETH_CONFIG=_ar803x)
+
+ligowave \
+ligowave-8M:
+	@$(call build,192,1,ETH_CONFIG=_s27)
 
 8devices_carambola2 \
 alfa-network_hornet-ub \

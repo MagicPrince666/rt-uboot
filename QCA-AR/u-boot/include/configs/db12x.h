@@ -276,8 +276,8 @@
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
 	#define OFFSET_MAC_ADDRESS		0x000000
 
-#elif defined(CONFIG_FOR_XAG_XLINKHS)||\
-      defined(CONFIG_FOR_XLINKHS)||\
+#elif defined(CONFIG_FOR_XAG_XLINKHS)	||\
+      defined(CONFIG_FOR_XLINKHS)		||\
       defined(CONFIG_FOR_LIGOWAVE_16M)
 
 	#define OFFSET_MAC_DATA_BLOCK		0xFF0000
