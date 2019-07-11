@@ -91,7 +91,7 @@ void rt_hw_board_init(void)
     rt_hw_interrupt_init();
 	
 #ifdef RT_USING_HEAP
-	rt_system_heap_init((void*)gd->rtos_mem_start, (void*)gd->rtos_mem_end);
+//	rt_system_heap_init((void*)gd->rtos_mem_start, (void*)gd->rtos_mem_end);
 #endif
 
 #ifdef RT_USING_COMPONENTS_INIT

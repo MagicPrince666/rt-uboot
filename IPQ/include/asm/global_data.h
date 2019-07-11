@@ -88,7 +88,7 @@ typedef	struct	global_data {
 	unsigned long	post_log_res; /* success of POST test */
 	unsigned long	post_init_f_time; /* When post_init_f started */
 #endif
-	int rtos_status;
+//	int rtos_status;
 	unsigned long rtos_mem_end;
 	unsigned long rtos_mem_start;
 } gd_t;

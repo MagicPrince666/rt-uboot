@@ -335,7 +335,7 @@ init_fnc_t *init_sequence[] = {
 	dram_init,		/* configure available RAM banks */
 	NULL,
 };
-
+//extern rd_t rd;
 void board_init_f(ulong bootflag)
 {
 	bd_t *bd;
@@ -551,7 +551,7 @@ void board_init_f(ulong bootflag)
 	debug("relocation Offset is: %08lx\n", gd->reloc_off);
 	memcpy(id, (void *)gd, sizeof(gd_t));
 	
-	rd.ram_buttom = addr_sp;
+//	rd.ram_buttom = addr_sp;
 
 #ifdef CONFIG_IPQ40XX_XIP
 	relocate_code(addr_sp, id, _TEXT_BASE);
