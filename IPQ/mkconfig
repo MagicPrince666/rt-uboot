@@ -104,14 +104,14 @@ if [ "$SRCTREE" != "$OBJTREE" ] ; then
 	mkdir -p ${OBJTREE}/include2
 	cd ${OBJTREE}/include2
 	#rm -rf asm
-	ln -s ${SRCTREE}/arch/${arch}/include/asm asm
+	#ln -s ${SRCTREE}/arch/${arch}/include/asm asm
 	LNPREFIX=${SRCTREE}/arch/${arch}/include/asm/
 	cd ../include
 	mkdir -p asm
 else
 	cd ./include
 	#rm -rf asm
-	ln -s ../arch/${arch}/include/asm asm
+	#ln -s ../arch/${arch}/include/asm asm
 fi
 
 rm -f asm/arch

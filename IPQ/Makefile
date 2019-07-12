@@ -58,10 +58,10 @@ VENDOR=
 
 #########################################################################
 # QSDK 1.3 ES3
-export HOSTCC=/home/wdc/xag/lede/staging_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-5.4.0_musl-1.1.16_eabi/bin/arm-openwrt-linux-muslgnueabi-gcc
+export HOSTCC=arm-openwrt-linux-muslgnueabi-gcc
 export HOSTSTRIP=true
-export CROSS_COMPILE=/home/wdc/xag/lede/staging_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-5.4.0_musl-1.1.16_eabi/bin/arm-openwrt-linux-muslgnueabi-
-export STAGING_DIR=/home/wdc/xag/lede/staging_dir/
+export CROSS_COMPILE=arm-openwrt-linux-muslgnueabi-
+#export STAGING_DIR=/home/wdc/xag/xlinkhs/staging_dir
 
 #########################################################################
 # Allow for silent builds
